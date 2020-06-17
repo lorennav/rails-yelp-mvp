@@ -1,2 +1,20 @@
-<h1>Restaurants#shownew</h1>
-<p>Find me in app/views/restaurants/shownew.html.erb</p>
+<h1><%= @restaurant.name %></h2>
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.category.capitalize %></p>
+<p><%= @restaurant.phone_number %></p>
+
+<ul class="list-group">
+  <h4><strong>Reviews</strong></h4>
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item"><%= review.content %> <%= "Rating: #{review.rating}*" %> </li>
+  <% end %>
+</ul>
+
+<div class="container review-box">
+  <h2>Write a review</h2>
+  <%= simple_form_for [ @restaurant, @review ] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+</div>
